@@ -12,8 +12,8 @@ def main():
     predictor.train(matches)
 
     # Example prediction: Man United vs Man City
-    home = "Man United"
-    away = "Man City"
+    home = "Arsenal"
+    away = "Man United"
 
     result = predictor.predict_match(home, away)
 

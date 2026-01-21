@@ -70,8 +70,40 @@ def backtest_by_season():
 
     return pd.DataFrame(results)
 
+def inspect_coefficients():
+    """
+    Train on all data and print model coefficients.
+    """
+    data = load_data()
+
+    # Ensure chronological order
+    data = data.sort_values(["season"]).reset_index(drop=True)
+
+    predictor = MatchPredictor()
+    predictor.train(data)
+
+    coef_df = predictor.get_coefficients()
+
+    print("\n=== TOP POSITIVE COEFFICIENTS (Home Win) ===")
+    print(
+        coef_df[coef_df["class"] == 2]
+        .sort_values("coefficient", ascending=False)
+        .head(10)
+    )
+
+    print("\n=== TOP NEGATIVE COEFFICIENTS (Away Win) ===")
+    print(
+        coef_df[coef_df["class"] == 0]
+        .sort_values("coefficient")
+        .head(10)
+    )
+
+
 
 if __name__ == "__main__":
     df_results = backtest_by_season()
     print("\nOverall results:")
     print(df_results)
+
+    inspect_coefficients()
+

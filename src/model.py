@@ -77,4 +77,29 @@ class MatchPredictor:
             pred["draw"],
             pred["home_win"]
         ]
+    def get_coefficients(self):
+        """
+        Returns a DataFrame of coefficients for each class.
+        """
+        clf = self.model.named_steps["clf"]
+        scaler = self.model.named_steps["scaler"]
+
+        # Feature names
+        features = self.model.feature_names_in_
+
+        # Coefficients after scaling
+        coefs = clf.coef_
+
+        # Classes: 0 = Away, 1 = Draw, 2 = Home
+        rows = []
+        for class_idx, class_label in enumerate(clf.classes_):
+            for feat, coef in zip(features, coefs[class_idx]):
+                rows.append({
+                    "class": class_label,
+                    "feature": feat,
+                    "coefficient": coef
+                })
+
+        return pd.DataFrame(rows)
+
 

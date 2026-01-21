@@ -9,11 +9,11 @@ from src.feature_engineering import add_form_features
 
 class MatchPredictor:
     def __init__(self):
-        # Pipeline = scaling + logistic regression
         self.model = Pipeline([
             ("scaler", StandardScaler()),
             ("clf", LogisticRegression(max_iter=1000))
         ])
+        self.history = None  # store training data
 
     def train(self, matches):
         matches = matches.copy()
@@ -21,7 +21,7 @@ class MatchPredictor:
         # Create target
         matches["target"] = matches["FTR"].map(LABEL_MAP)
 
-        # Create features
+        # Generate features using full history
         matches = add_form_features(matches)
 
         X = matches[FEATURES]
@@ -29,28 +29,52 @@ class MatchPredictor:
 
         self.model.fit(X, y)
 
+        # Save history for future predictions
+        self.history = matches.copy()
+
     def predict_match(self, home_team, away_team):
-        # Dummy row to generate features
-        row = {
+        if self.history is None:
+            raise RuntimeError("Model must be trained before prediction")
+
+        # Create future match (dummy result/goals)
+        future_match = pd.DataFrame([{
             "HomeTeam": home_team,
             "AwayTeam": away_team,
             "FTR": "D",   # dummy
             "FTHG": 0,    # dummy
             "FTAG": 0     # dummy
-        }
+        }])
 
-        df = pd.DataFrame([row])
+        # Append to historical data
+        combined = pd.concat([self.history, future_match], ignore_index=True)
 
-        # Generate features using SAME pipeline
-        df = add_form_features(df)
+        # Regenerate features INCLUDING history
+        combined = add_form_features(combined)
 
-        X_match = df[FEATURES]
+        # Extract features for the future match
+        X_match = combined.iloc[-1:][FEATURES]
 
         probs = self.model.predict_proba(X_match)[0]
+        classes = self.model.classes_
+
+        prob_map = dict(zip(classes, probs))
 
         return {
-            "home_win": probs[2],
-            "draw": probs[1],
-            "away_win": probs[0],
-            "prediction": ["Away Win", "Draw", "Home Win"][probs.argmax()]
+            "home_win": prob_map[LABEL_MAP["H"]],
+            "draw": prob_map[LABEL_MAP["D"]],
+            "away_win": prob_map[LABEL_MAP["A"]],
+            "prediction": max(
+                [("Home Win", prob_map[LABEL_MAP["H"]]),
+                 ("Draw", prob_map[LABEL_MAP["D"]]),
+                 ("Away Win", prob_map[LABEL_MAP["A"]])],
+                key=lambda x: x[1]
+            )[0]
         }
+    def predict_proba_match(self, home_team, away_team):
+        pred = self.predict_match(home_team, away_team)
+        return [
+            pred["away_win"],
+            pred["draw"],
+            pred["home_win"]
+        ]
+

@@ -160,4 +160,22 @@ def add_form_features(matches):
     matches["h2h_goal_diff_home_lastN"] = h2h_home_goal_diff
     matches["h2h_matches_lastN"] = h2h_matches
 
+        # -------- Form differentials (home - away) --------
+    matches["form_points_diff"] = (
+        matches["home_points_lastN"] - matches["away_points_lastN"]
+    )
+
+    matches["form_goal_diff_diff"] = (
+        matches["home_goal_diff_lastN"] - matches["away_goal_diff_lastN"]
+    )
+
+    matches["season_strength_diff"] = (
+        matches["home_season_strength"] - matches["away_season_strength"]
+    )
+
+    matches["h2h_points_diff"] = (
+        matches["h2h_points_home_lastN"] - matches["h2h_points_away_lastN"]
+    )
+
+
     return matches

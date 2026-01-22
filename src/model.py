@@ -11,7 +11,12 @@ class MatchPredictor:
     def __init__(self):
         self.model = Pipeline([
             ("scaler", StandardScaler()),
-            ("clf", LogisticRegression(max_iter=1000))
+            ("clf", LogisticRegression(
+                max_iter=1000,
+                C=0.3,
+                solver="lbfgs"
+            ))
+
         ])
         self.history = None  # store training data
 

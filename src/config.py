@@ -26,33 +26,10 @@ BIG_TEAMS = {
 }
 
 # -------- FEATURES: STATS-ONLY BASELINE --------
+# -------- FEATURES: DIFFERENTIALS-ONLY BASELINE --------
 FEATURES = [
-    # Recent form
-    "home_points_lastN",
-    "home_goals_scored_lastN",
-    "home_goals_conceded_lastN",
-    "home_goal_diff_lastN",
-    "home_matches_lastN",
-
-    "away_points_lastN",
-    "away_goals_scored_lastN",
-    "away_goals_conceded_lastN",
-    "away_goal_diff_lastN",
-    "away_matches_lastN",
-
-    # Season strength
-    "home_season_strength",
-    "away_season_strength",
-
-    # Head-to-head
-    "h2h_points_home_lastN",
-    "h2h_points_away_lastN",
-    "h2h_goal_diff_home_lastN",
-    "h2h_matches_lastN",
-        # -------- Differentials --------
     "form_points_diff",
     "form_goal_diff_diff",
     "season_strength_diff",
     "h2h_points_diff",
-
 ]

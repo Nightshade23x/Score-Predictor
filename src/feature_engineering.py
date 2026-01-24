@@ -37,6 +37,8 @@ def add_form_features(matches):
     h2h_away_points = []
     h2h_home_goal_diff = []
     h2h_matches = []
+    
+
 
     # -------- New pattern features --------
     home_vs_big = []
@@ -160,7 +162,8 @@ def add_form_features(matches):
     matches["h2h_goal_diff_home_lastN"] = h2h_home_goal_diff
     matches["h2h_matches_lastN"] = h2h_matches
 
-        # -------- Form differentials (home - away) --------
+    
+    # -------- Form differentials (home - away) --------
     matches["form_points_diff"] = (
         matches["home_points_lastN"] - matches["away_points_lastN"]
     )
@@ -177,6 +180,7 @@ def add_form_features(matches):
         matches["h2h_points_home_lastN"] - matches["h2h_points_away_lastN"]
     )
 
-    
+    # -------- Final cleanup --------
+    matches.fillna(0, inplace=True)
 
     return matches

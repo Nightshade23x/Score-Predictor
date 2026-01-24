@@ -1,0 +1,48 @@
+## Baseline v1 – Differentials-only Logistic Regression
+
+**Setup**
+- Model: Logistic Regression (C = 0.3)
+- Features:
+  - form_points_diff
+  - form_goal_diff_diff
+  - season_strength_diff
+  - h2h_points_diff
+- Backtest: season-by-season (train < test)
+
+**Results**
+| Test Season | Accuracy | Log Loss |
+|------------|----------|----------|
+| 19–20 | 0.495 | 1.013 |
+| 20–21 | 0.468 | 1.065 |
+| 21–22 | 0.505 | 0.988 |
+| 22–23 | 0.476 | 1.041 |
+| 23–24 | 0.539 | 0.975 |
+| 24–25 | 0.463 | 1.043 |
+| 25–26 | 0.476 | 1.037 |
+
+**Summary**
+- Mean accuracy ≈ **0.489**
+- Mean log loss ≈ **1.023**
+
+
+### Ablation – form_points_diff only
+- Mean accuracy ≈ 0.47
+- Mean log loss ≈ 1.05
+
+
+### Ablation – form_goal_diff_diff only
+- Mean accuracy ≈ 0.46
+- Mean log loss ≈ 1.05
+
+### Ablation – season_strength_diff only
+- Mean accuracy ≈ 0.51
+- Mean log loss ≈ 1.03
+
+### Ablation – h2h_points_diff only
+- Mean accuracy ≈ 0.47
+- Mean log loss ≈ 1.05
+
+**Ablation conclusion:**  
+Season-long strength is the strongest standalone signal. Other
+features provide complementary value and improve calibration when
+combined.

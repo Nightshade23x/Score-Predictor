@@ -46,3 +46,49 @@
 Season-long strength is the strongest standalone signal. Other
 features provide complementary value and improve calibration when
 combined.
+
+### Ablation – season_strength_diff + form_points_diff
+- Mean accuracy ≈ 0.51–0.52 (peak ≈ 0.56)
+- Mean log loss ≈ 1.01 (best ≈ 0.96)
+
+
+### Ablation – season_strength_diff + form_goal_diff_diff
+- Mean accuracy ≈ 0.50
+- Mean log loss ≈ 1.03
+
+
+### Ablation – season_strength_diff + form_points_diff + form_goal_diff_diff
+- Mean accuracy ≈ 0.50
+- Mean log loss ≈ 1.02
+
+**Ablation conclusion:**  
+Season-long strength is the strongest standalone signal. Points-based
+recent form provides consistent complementary value. Goal-difference
+form does not improve performance when added alongside points-based
+form and is excluded from the final feature set.
+
+**Final feature set:**  
+`season_strength_diff`, `form_points_diff`
+
+## Final Model v1 – Evaluation
+
+**Model**
+- Logistic Regression (C = 0.3)
+- Standardized features
+- Rolling season-by-season backtest (train < test)
+
+**Final Feature Set**
+- season_strength_diff
+- form_points_diff
+
+**Results**
+- Mean accuracy ≈ 0.51
+- Mean log loss ≈ 1.01
+- Best season (2023–24): Accuracy = 0.563, Log loss = 0.957
+
+**Notes**
+The final model outperforms a broader differentials-based baseline,
+demonstrating that a small, carefully selected feature set yields better
+generalization and probability calibration.
+
+

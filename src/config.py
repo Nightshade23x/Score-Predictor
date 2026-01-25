@@ -28,6 +28,7 @@ BIG_TEAMS = {
 # -------- FEATURES: STATS-ONLY BASELINE --------
 # -------- FEATURES: DIFFERENTIALS-ONLY BASELINE --------
 FEATURES = [
-    "h2h_points_diff",
+    "season_strength_diff",
+    "form_points_diff",
     
 ]

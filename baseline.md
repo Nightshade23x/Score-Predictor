@@ -96,4 +96,10 @@ generalization and probability calibration.
 - Mean accuracy ≈ 0.51
 - Mean log loss ≈ 1.03
 
+## v2.1 – season_strength_diff + home_points_lastN + away_points_lastN
+- Mean accuracy ≈ 0.51
+- Mean log loss ≈ 1.03
+- Home and away form show asymmetric effects, but overall performance remains similar to v2.0.
+
+
 

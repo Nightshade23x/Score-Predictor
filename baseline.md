@@ -92,3 +92,8 @@ demonstrating that a small, carefully selected feature set yields better
 generalization and probability calibration.
 
 
+## v2 – season_strength_diff + form_points_diff + home_advantage
+- Mean accuracy ≈ 0.51
+- Mean log loss ≈ 1.03
+
+

@@ -29,6 +29,6 @@ BIG_TEAMS = {
 # -------- FEATURES: DIFFERENTIALS-ONLY BASELINE --------
 FEATURES = [
     "season_strength_diff",
-    "form_points_diff",
-    
+    "home_points_lastN",
+    "away_points_lastN",
 ]

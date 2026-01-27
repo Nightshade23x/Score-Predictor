@@ -102,4 +102,20 @@ generalization and probability calibration.
 - Home and away form show asymmetric effects, but overall performance remains similar to v2.0.
 
 
+## v3 – Gradient Boosting (non-linear)
+- Mean accuracy ≈ 0.46–0.47
+- Mean log loss ≈ 1.09
+
+- Initial non-linear model underperforms linear baselines without tuning.
+
+
+## v3.1 – Gradient Boosting (tuned)
+- Mean accuracy ≈ 0.47
+- Mean log loss ≈ 1.05
+
+## v3.2 – Gradient Boosting + form_asymmetry
+- Mean accuracy ≈ 0.48
+- Mean log loss ≈ 1.04
+
+
 

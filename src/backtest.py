@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, log_loss, brier_score_loss
 
 from src.data_loader import load_data
-from src.model import MatchPredictor
+from src.model_gb import GBMatchPredictor
 from src.config import FEATURES
 
 
@@ -24,7 +24,7 @@ def backtest_by_season():
         train_data = data[data["season"].isin(train_seasons)]
         test_data = data[data["season"] == test_season]
 
-        predictor = MatchPredictor()
+        predictor = GBMatchPredictor()
         predictor.train(train_data)
 
         y_true = []
@@ -70,7 +70,7 @@ def backtest_by_season():
 
     return pd.DataFrame(results)
 
-def inspect_coefficients():
+#def inspect_coefficients():
     """
     Train on all data and print model coefficients.
     """
@@ -79,7 +79,7 @@ def inspect_coefficients():
     # Ensure chronological order
     data = data.sort_values(["season"]).reset_index(drop=True)
 
-    predictor = MatchPredictor()
+    predictor = GBMatchPredictor()
     predictor.train(data)
 
     coef_df = predictor.get_coefficients()
@@ -105,5 +105,5 @@ if __name__ == "__main__":
     print("\nOverall results:")
     print(df_results)
 
-    inspect_coefficients()
+    #inspect_coefficients()
 

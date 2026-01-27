@@ -179,6 +179,10 @@ def add_form_features(matches):
     matches["h2h_points_diff"] = (
         matches["h2h_points_home_lastN"] - matches["h2h_points_away_lastN"]
     )
+    matches["form_asymmetry"] = (
+        matches["home_points_lastN"] - matches["away_points_lastN"]
+    )
+
     # -------- Home advantage --------
     matches["home_advantage"] = 1
 

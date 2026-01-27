@@ -31,4 +31,5 @@ FEATURES = [
     "season_strength_diff",
     "home_points_lastN",
     "away_points_lastN",
+    "form_asymmetry",
 ]

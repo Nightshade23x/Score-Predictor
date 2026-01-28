@@ -118,4 +118,13 @@ generalization and probability calibration.
 - Mean log loss ≈ 1.04
 
 
+## v4.0 – Logistic Regression + betting odds
+- Mean accuracy ≈ 0.50
+- Mean log loss ≈ 1.04
+
+## v5 – Binary classification (Home Win vs Not Home Win) + betting odds
+- Mean accuracy ≈ 0.63–0.65
+- Mean log loss ≈ 0.65
+
+
 

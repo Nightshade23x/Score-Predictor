@@ -24,7 +24,9 @@ class MatchPredictor:
         matches = matches.copy()
 
         # Create target
-        matches["target"] = matches["FTR"].map(LABEL_MAP)
+        # Binary target: Home Win vs Not Home Win
+        matches["target"] = (matches["FTR"] == "H").astype(int)
+
 
         # Generate features using full history
         matches = add_form_features(matches)
@@ -63,18 +65,17 @@ class MatchPredictor:
         classes = self.model.classes_
 
         prob_map = dict(zip(classes, probs))
+        prob_home = probs[1]   # probability of Home Win
+        prob_not_home = probs[0]
 
         return {
-            "home_win": prob_map[LABEL_MAP["H"]],
-            "draw": prob_map[LABEL_MAP["D"]],
-            "away_win": prob_map[LABEL_MAP["A"]],
-            "prediction": max(
-                [("Home Win", prob_map[LABEL_MAP["H"]]),
-                 ("Draw", prob_map[LABEL_MAP["D"]]),
-                 ("Away Win", prob_map[LABEL_MAP["A"]])],
-                key=lambda x: x[1]
-            )[0]
+            "home_win": prob_home,
+            "not_home_win": prob_not_home,
+            "prediction": "Home Win" if prob_home >= 0.5 else "Not Home Win"
         }
+
+
+        
     def predict_proba_match(self, home_team, away_team):
         pred = self.predict_match(home_team, away_team)
         return [

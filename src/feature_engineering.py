@@ -185,6 +185,17 @@ def add_form_features(matches):
 
     # -------- Home advantage --------
     matches["home_advantage"] = 1
+    # -------- Betting odds (implied probabilities) --------
+    p_home = 1 / matches["AvgH"]
+    p_draw = 1 / matches["AvgD"]
+    p_away = 1 / matches["AvgA"]
+
+    total = p_home + p_draw + p_away
+
+    matches["odds_p_home"] = p_home / total
+    matches["odds_p_draw"] = p_draw / total
+    matches["odds_p_away"] = p_away / total
+
 
     # -------- Final cleanup --------
     matches.fillna(0, inplace=True)

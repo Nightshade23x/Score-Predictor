@@ -126,5 +126,21 @@ generalization and probability calibration.
 - Mean accuracy ≈ 0.63–0.65
 - Mean log loss ≈ 0.65
 
+## v5.1 – Odds-only baseline (binary)
+- Mean accuracy ≈ 0.55–0.62
+- Mean log loss ≈ 0.69
 
+
+## v5.2 – Threshold tuning (binary, τ = 0.55)
+- Mean accuracy ≈ 0.62–0.64
+- Mean log loss ≈ 0.65
+
+
+## Threshold tuning (binary, τ = 0.50)
+- Mean accuracy ≈ 0.63
+- Mean log loss ≈ 0.65
+
+## v5.2 – Threshold tuning (binary, τ = 0.60)
+- Mean accuracy ≈ 0.59–0.60
+- Mean log loss ≈ 0.65
 

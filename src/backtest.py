@@ -7,6 +7,7 @@ from src.config import FEATURES
 
 
 def backtest_by_season():
+    THRESHOLD=0.60
     data = load_data()
 
     # IMPORTANT: ensure chronological order
@@ -36,7 +37,8 @@ def backtest_by_season():
 
             y_true.append(1 if row["FTR"] == "H" else 0)
             y_prob.append(pred["home_win"])
-            y_pred.append(1 if pred["home_win"] >= 0.5 else 0)
+            y_pred.append(1 if pred["home_win"] >= THRESHOLD else 0)
+
 
 
         # Map labels for metrics
